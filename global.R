@@ -40,7 +40,8 @@ source("txt/notes.R")
 #############################################################################
 # Load the data and basic data prep
 #############################################################################
-load("data/WLFW_data_final_31Dec2015.RData")
+# load("data/WLFW_data_final_31Dec2015.RData")
+load("data/23Feb2017_WLFW_data_upd.rda")
 full$practice_code <- as.factor(full$practice_code)
 full$practice_units <- as.factor(full$practice_units)
 full$species <- as.factor(full$species)
@@ -159,7 +160,7 @@ validateColor_2 <- function(color) {
     if (color %in% validColors_2) {
         return(TRUE)
     }
-  
+
     stop("Invalid color: ", color, ". Valid colors are: ",
          paste(validColors_2, collapse = ", "), ".")
 }

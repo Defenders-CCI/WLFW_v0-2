@@ -1,16 +1,12 @@
 /*Some custom css to modify the standard Shiny values. */
 
-.modal-lg-dialog {
-    width: 75%;
-}
+.modal-lg-dialog { width: 75%; }
 
-.modal-sm-dialog {
-    width: 40%;
-}
+.modal-sm-dialog { width: 40%; }
 
-.box {
-    margin-bottom: 0;
-}
+.modal-content { border-radius: 2px; }
+
+.box { margin-bottom: 0; }
 
 .box.box-warning {
     border-top-color: #ffffff;
@@ -72,23 +68,30 @@ div.graph-outer {
 }
 
 /* Customize fonts */
-body, label, input, button, select { 
+body, label, input, button, select {
   font-family: 'Open Sans';
   /* font-family: 'Helvetica Neue', Helvetica; */
   font-weight: 300;
 }
-h1, h2, h3, h4 { font-weight: 400; }
+
+h1, h2, h3, h4 {
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
 #controls {
   /* Appearance */
   background-color: white;
+  border-radius: 2px;
   padding: 0 0 0 0;
   cursor: move;
   /* Fade out while not hovering */
   opacity: 0.9;
   zoom: 0.9;
-  transition: opacity 500ms 1s;
+  transition: opacity 100ms 500ms;
 }
+
 #controls:hover {
   /* Fade in while hovering */
   opacity: 0.97;
@@ -104,20 +107,21 @@ h1, h2, h3, h4 { font-weight: 400; }
   /* Fade out while not hovering */
   opacity: 0.85;
   zoom: 0.9;
-  transition: opacity 500ms 1s;
+  transition: opacity 100ms 500ms;
 }
 
 #map-filt-box {
   /* Appearance */
   background-color: white;
-  border-color: #d9d9d9;
-  /* box-shadow: 2px 2px 2px #888888; */
-  padding: 20px 20px 20px 20px;
+  border-color: white;
+  border-radius: 2px;
+  padding: 10px 10px 10px 10px;
   /* Fade out while not hovering */
-  opacity: 0.9;
+  opacity: 0.90;
   zoom: 0.9;
-  transition: opacity 500ms 1s;
+  transition: opacity 100ms 500ms;
 }
+
 #map-filt-box:hover {
   /* Fade in while hovering */
   opacity: 0.98;
@@ -137,7 +141,15 @@ h1, h2, h3, h4 { font-weight: 400; }
   background-color: white !important;
 }
 
+.info {
+  border-radius: 2px;
+}
+
 .bottom-align {
     position: absolute;
     bottom: 12px;
+}
+
+.shiny-input-container:not(.shiny-input-container-inline) {
+  margin-bottom: 0;
 }
