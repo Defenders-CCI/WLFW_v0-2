@@ -17,36 +17,36 @@
 ###############################################################################
 # Page for users to get the selected data.
 data_page <- {
-    tabPanel(title="Data",
+  tabPanel(title="Data",
+    fluidRow(
+      div(style="overflow-x: scroll; background-color: #FFFFFF;
+             padding-left: 15px",
         fluidRow(
-            div(style="overflow-x: scroll; background-color: #FFFFFF;
-                       padding-left: 15px", 
-                fluidRow(
-                    column(4,
-                        h3("Selected data"),
-                        div(class="btn-group",
-                            bsButton("table_help",
-                                     label="Table Help",
-                                     style="info"
-                            ),
-                            tipify(
-                                downloadButton("download_data", "Download (tab-sep.)"),
-                                title="Download the data subset that is selected on the map page."
-                            )
-                        )
-                    )
-                ),
-                br(), hr(),
-                DT::dataTableOutput("selected_data")
+          column(4,
+            h3("Selected data"),
+            div(class="btn-group",
+              bsButton("table_help",
+                   label="Table Help",
+                   style="info"
+              ),
+              tipify(
+                downloadButton("download_data", "Download Excel"),
+                title="Download the data selected on the Map page."
+              )
             )
+          )
         ),
-        br(),
-        fluidRow(
-            column(3),
-            column(6,
-                div(HTML(defenders_cc()), style="text-align: center")
-            ),
-            column(3)
-        )
+        br(), hr(),
+        DT::dataTableOutput("selected_data")
+      )
+    ),
+    br(),
+    fluidRow(
+      column(3),
+      column(6,
+        div(HTML(defenders_cc()), style="text-align: center")
+      ),
+      column(3)
     )
+  )
 }

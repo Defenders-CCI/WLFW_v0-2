@@ -21,70 +21,66 @@ source("server_pages/server_map_page.R")
 #############################################################################
 shinyServer(function(input, output, session) {
 
-    # The basic reactive subsetting functions...separate functions for each
-    # of the pages.
-    selected <- reactive({
-        sub_df(full,
-               input$FY,
-               input$cur_species,
-               ifelse(length(input$cur_practice) == 0,
-                      "All",
-                      input$cur_practice)
-        )
-    })
-
-    output$defenders <- renderImage({
-        width <- session$clientData$output_defenders_width
-        if (width > 100) {
-            width <- 100
-        }
-        list(src = "www/01_DOW_LOGO_COLOR_300.png",
-             contentType = "image/png",
-             alt = "Defenders of Wildlife",
-             width=width)
-    }, deleteFile=FALSE)
-
-    # Call the files with server functions broken out by page
-    server_map_page(input, output, selected, session)
-
-    ###########################################################################
-    # The following function calls are used for getting the data selections
-    # for download.
-
-    sel_cols <- c(1:19, 21:23, 29)
-    
-    output$selected_data <- DT::renderDataTable(
-        selected()[, sel_cols],
-        rownames=FALSE,
-        filter="top", 
-        extensions="ColVis", 
-        options = list(dom = 'C<"clear">lfrtip')
+  # The basic reactive subsetting functions...separate functions for each
+  # of the pages.
+  selected <- reactive({
+    sub_df(full,
+         input$FY,
+         input$cur_species,
+         ifelse(length(input$cur_practice) == 0,
+            "All",
+            input$cur_practice)
     )
-    
-    output$download_data <- downloadHandler(
-        filename=function() {
-            "selected_data.tab"
-        },
-        content=function(file) {
-            data_to_get <- selected()[, sel_cols]
-            for_write <- data_to_get
-            write.table(for_write, 
-                        file=file, 
-                        sep="\t",
-                        row.names=FALSE,
-                        quote=FALSE)
-        }
-    )
-    
-    output$download_metadata <- downloadHandler(
-        filename=function() {
-            "WLFW_metadata.json"
-        },
-        content=function(file) {
-            sink(file)
-            cat(the_metadata)
-            sink()
-        }
-    )
+  })
+
+  output$defenders <- renderImage({
+    width <- session$clientData$output_defenders_width
+    if (width > 100) {
+      width <- 100
+    }
+    list(src = "www/01_DOW_LOGO_COLOR_300.png",
+       contentType = "image/png",
+       alt = "Defenders of Wildlife",
+       width=width)
+  }, deleteFile=FALSE)
+
+  # Call the files with server functions broken out by page
+  server_map_page(input, output, selected, session)
+
+  ###########################################################################
+  # The following function calls are used for getting the data selections
+  # for download.
+
+  sel_cols <- c(2:19, 21:23, 29)
+
+  output$selected_data <- DT::renderDataTable(
+    selected()[, sel_cols],
+    rownames=FALSE,
+    filter="top",
+    extensions = 'Buttons',
+    options = list(dom = 'Bfrtip', buttons = I('colvis'))
+  )
+
+  output$download_data <- downloadHandler(
+    filename=function() {
+      "selected_WLFW_data.xlsx"
+    },
+    content=function(file) {
+      data_to_get <- selected()[, sel_cols]
+      for_write <- data_to_get
+      export(for_write, file=file)
+    }
+  )
+
+  output$download_metadata <- downloadHandler(
+    filename=function() {
+      "WLFW_metadata.json"
+    },
+    content=function(file) {
+      sink(file)
+    cat(the_metadata)
+      sink()
+    }
+  )
 
 })

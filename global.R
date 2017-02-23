@@ -29,6 +29,7 @@ library(sp)
 
 library(googleVis)
 library(plyr)
+library(rio)
 
 source("data_mgmt/make_dataframes.R")
 source("data_mgmt/subset_fx.R")
