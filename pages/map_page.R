@@ -36,6 +36,7 @@ map_page <- {
         fixed = TRUE, draggable = FALSE, top = "auto", left = "auto",
         right = 20, bottom = 20, width = 100, height = "auto",
         a(href="http://www.defenders.org",
+          target = "_blank",
           imageOutput("defenders", height=NULL))
       ),
 
