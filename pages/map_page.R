@@ -35,7 +35,8 @@ map_page <- {
       absolutePanel(id = "help-button-box", class = "panel panel-default",
         fixed = TRUE, draggable = FALSE, top = "auto", left = "auto",
         right = 20, bottom = 20, width = 100, height = "auto",
-        a(href="www.defenders.org", imageOutput("defenders", height=NULL))
+        a(href="http://www.defenders.org",
+          imageOutput("defenders", height=NULL))
       ),
 
       # Add map style choices
