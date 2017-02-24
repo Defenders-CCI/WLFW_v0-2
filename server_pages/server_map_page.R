@@ -125,17 +125,18 @@ server_map_page <- function(input, output, selected, session) {
 
   # proxy to add/change polygons
   observe({
-    popupFormat <- paste0("<strong>", cur_data()@data[[5]], " Co.</strong>",
-                "<br>Expenditures: $",
-                prettyNum(cur_data()@data[[19]], big.mark=","),
-                "<br>Acres treated: ",
-                cur_data()@data[[20]],
-                "<br>Dollars / ac.: $",
-                prettyNum(round(cur_data()@data[[21]], 0),
-                    big.mark=","),
-                " / ac.",
-                "<br># Contracts: ",
-                cur_data()@data[[22]]
+    popupFormat <- paste0(
+      "<strong>", cur_data()@data[[5]], " Co.</strong>",
+      "<br>Expenditures: $",
+      prettyNum(cur_data()@data[[19]], big.mark=","),
+      "<br>Acres treated: ",
+      cur_data()@data[[20]],
+      "<br>Dollars / ac.: $",
+      prettyNum(round(cur_data()@data[[21]], 0),
+          big.mark=","),
+      " / ac.",
+      "<br># Contracts: ",
+      cur_data()@data[[22]]
     )
 
     leafletProxy("map", data=cur_data()) %>%
