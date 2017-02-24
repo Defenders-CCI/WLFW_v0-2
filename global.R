@@ -51,7 +51,7 @@ full$species <- as.factor(full$species)
 # Get variables for selections
 #
 # To facilitate adding new data, generate the vectors from the data
-years <- c("All", unique(full$fy))
+years <- c("All", sort(unique(full$fy)))
 states <- c("All", levels(full$st_nm))
 counties <- c("All", levels(full$cnt_st))
 programs <- c("All", levels(full$program_name))
