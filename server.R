@@ -47,10 +47,6 @@ shinyServer(function(input, output, session) {
   # Call the files with server functions broken out by page
   server_map_page(input, output, selected, session)
 
-  ###########################################################################
-  # The following function calls are used for getting the data selections
-  # for download.
-
   sel_cols <- c(2:19, 21:23, 29)
 
   output$selected_data <- DT::renderDataTable(

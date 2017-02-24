@@ -24,6 +24,7 @@ map_page <- {
     title="Interactive map",
 		div(class="outer",
 		  tags$head(
+		    HTML("<title>Working Lands for Wildlife</title>"),
         HTML(paste(openSans, fontAwesome)),
         includeCSS("www/custom_styles.css")
       ),
@@ -126,9 +127,11 @@ map_page <- {
           selectInput(
             inputId="y_axis",
             label="Y axis",
-            choices=c("Allocated amt. ($)" = "Practice_Obligations",
-                  "Total treated ac." = "total_treated_acres",
-                  "# items / contract" = "number_contracts"),
+            choices=c(
+              "Allocated amt. ($)" = "Practice_Obligations",
+              "Total treated ac." = "total_treated_acres" #,
+              # "# items / contract" = "number_contracts"
+            ),
             width="95%"
           ),
           bsButton("big_chart",

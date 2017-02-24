@@ -52,16 +52,21 @@ body <- dashboardBody(
     ),
     bsModal(
       "mod_big_chart",
-      title="",
+      title = textOutput("big_chart_title"),
       trigger="big_chart",
       size="large",
       htmlOutput("large_chart"),
       fluidRow(
-        htmlOutput("big_chart_caption")
+        column(1),
+        column(11,
+          htmlOutput("big_chart_caption")
+        )
       )
     ),
     results_page
 )
 
-dashboardPage(header, sidebar, body, skin="blue")
+dashboardPage(header, sidebar, body,
+              title = "Working Lands for Wildlife",
+              skin="blue")
 # shinyUI(body)

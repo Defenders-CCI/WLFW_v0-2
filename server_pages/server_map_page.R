@@ -206,17 +206,53 @@ server_map_page <- function(input, output, selected, session) {
   })
 
   output$large_chart <- renderGvis({
+    # observe({print(c(input$x_axis, input$y_axis))})
     x <- input$x_axis
     y <- input$y_axis
-    output$big_chart_caption <- renderUI(
-      HTML("<p>This is a new placeholder.</p>")
-    )
-    if (x %in% c("fy", "STATE", "cnt_st", "practice_name")) {
-      make_bargraph(selected(), x, y)
+    if(x %in% c("fy", "STATE", "cnt_st", "practice_name") &
+       y != "number_contracts") {
+      output$big_chart_title <- renderText({
+        paste(
+          tolower(gsub(input$y_axis, pattern = "_", replacement = " ")),
+          "by",
+          ifelse(x == "fy", "FY",
+            ifelse(x == "STATE", "state",
+              ifelse(x == "cnt_st", "county, state", "practice name")
+            )
+          )
+        )
+      })
+      output$big_chart_caption <- renderUI({
+        res <- make_bar_caption(selected(), x, y)
+        HTML(res)
+      })
+      return(make_bargraph(selected(), x, y))
     } else if (x == "hist") {
-      make_hist(selected(), y)
+      output$big_chart_caption <- renderUI(
+        make_hist_caption(selected(), x, y)
+      )
+      return(make_hist(selected(), y))
     } else {
-      make_scatterp(selected(), x, y)
+      output$big_chart_title <- renderText({
+        paste(
+          tolower(gsub(input$y_axis, pattern = "_", replacement = " ")),
+          "by",
+          ifelse(x == "fy", "FY",
+            ifelse(x == "STATE", "state",
+              ifelse(x == "cnt_st", "county, state",
+                ifelse(x == "practice_name",
+                       "practice name",
+                       "practice obligations ($)"
+                )
+              )
+            )
+          )
+        )
+      })
+      output$big_chart_caption <- renderUI(
+        HTML(make_scatter_caption(selected(), x, y))
+      )
+      return(make_scatterp(selected(), x, y))
     }
   })
 

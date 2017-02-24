@@ -15,59 +15,63 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 axis_lab <- function(x) {
-    switch(x,
-        "fy" = "Fiscal Year",
-        "STATE" = "State",
-        "cnt_st" = "County (state)",
-        "practice_name" = "Work type (practice)",
-        "Contract_Obligation" = "Contract amt. ($)",
-        "Practice_Obligations" = "Practice amt.",
-        "total_treated_acres" = "Total treated ac.",
-        "number_contracts" = "N contracts")
+  switch(x,
+    "fy" = "Fiscal Year",
+    "STATE" = "State",
+    "cnt_st" = "County (state)",
+    "practice_name" = "Work type (practice)",
+    "Contract_Obligation" = "Contract amt. ($)",
+    "Practice_Obligations" = "Practice amt.",
+    "total_treated_acres" = "Total treated ac.",
+    "number_contracts" = "N contracts")
 }
 
 #############################################################################
 # Species summary barchart
-make_bargraph <- function(dat, x, y, height="475px", chartHeight="65%") {
-    cur_dat <- make_top_25_df(dat, x, y)
-    chart2 <- gvisColumnChart(cur_dat,
-                  xvar=axis_lab(x),
-                  yvar=axis_lab(y),
-                  options = list(height=height,
-                                 colors="['#0A4783']",
-                                 legend="{position: 'none'}",
-                                 vAxis=paste("{title: '", axis_lab(y), "'}")
-                  )
-             )
-    chart2
+make_bargraph <- function(dat, x, y, height = "475px", chartHeight = "65%") {
+  cur_dat <- make_top_25_df(dat, x, y)
+  chart2 <- gvisColumnChart(
+    cur_dat,
+    xvar = axis_lab(x),
+    yvar = axis_lab(y),
+    options = list(height = height,
+           colors = "['#0A4783']",
+           legend = "{position: 'none'}",
+           vAxis = paste("{title: '", axis_lab(y), "'}")
+    )
+  )
+  return(chart2)
 }
 
-make_scatterp <- function(dat, x, y, height="475px", chartHeight="65%") {
-    cur_dat <- make_scatterp_df(dat, x, y)
-    chart2 <- gvisScatterChart(cur_dat,
-                  options = list(height=height,
-                                 colors="['#0A4783']",
-                                 legend="{position: 'none'}",
-                                 hAxis=paste0("{title: '", axis_lab(x), "', 
-                                             logScale: 'true'}"),
-                                 vAxis=paste0("{title: '", axis_lab(y), "', 
-                                             logScale: 'true'}"),
-                                 dataOpacity=0.3
-                  )
-             )
-    chart2
+make_scatterp <- function(dat, x, y, height = "475px", chartHeight = "65%") {
+  cur_dat <- make_scatterp_df(dat, x, y)
+  chart2 <- gvisScatterChart(
+    cur_dat,
+    options = list(height = height,
+           colors = "['#0A4783']",
+           legend = "{position: 'none'}",
+           hAxis = paste0("{title: '", axis_lab(x), "',
+                 logScale: 'true'}"),
+           vAxis = paste0("{title: '", axis_lab(y), "',
+                 logScale: 'true'}"),
+           dataOpacity = 0.3
+    )
+  )
+  return(chart2)
 }
 
-# make_hist <- function(dat, y, height="475px", chartHeight="65%") {
-#     cur_dat <- make_hist_df(dat, y)
-#     cur_dat <- data.frame(cur_dat[,2])
-#     chart <- gvisHistogram(cur_dat,
-#                  options=list(height=height,
-#                               colors="['#0A4783']",
-#                               legend="{position: 'none'}",
-#                               dataOpacity=0.5)
-#     )
-#     chart
-# }
+make_hist <- function(dat, y, height = "475px", chartHeight = "65%") {
+  cur_dat <- make_hist_df(dat, y)
+  cur_dat <- data.frame(cur_dat[,2])
+  chart <- gvisHistogram(
+    cur_dat,
+    options = list(
+      height = height,
+      colors = "['#0A4783']",
+      legend = "{position: 'none'}",
+      dataOpacity = 0.5)
+  )
+  return(chart)
+}
 
 

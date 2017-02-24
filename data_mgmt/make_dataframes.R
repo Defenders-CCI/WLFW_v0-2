@@ -27,7 +27,7 @@ make_alt_map_df <- function(sub, esls, resp) {
                       FUN=sum, na.rm=TRUE)
         res
     }
-    
+
     tot_spend <- tapply(sub$Practice_Obligations,
                         INDEX=sub$GEOID,
                         FUN=sum, na.rm=TRUE)
@@ -69,11 +69,12 @@ make_alt_map_df <- function(sub, esls, resp) {
 ############################################################################
 # Create a small dataframe for top 25 species bar plot
 tooltips <- function(sp, dol, src) {
-    paste0("<div style='padding:5px 5px 5px 5px;'><b>", 
+    paste0("<div style='padding:5px 5px 5px 5px;'><b>",
            sp, '</b><br>', src, ":<br>$", prettyNum(dol, big.mark=","), "</div>")
 }
 
 make_top_25_df <- function(sub, x, y) {
+  observe({print(c(x, y))})
     res <- tapply(sub[[y]], INDEX=sub[[x]], FUN=sum, na.rm=TRUE)
     if (x == "fy") {
         res_df <- data.frame(num=rep(1:length(res)))
@@ -100,6 +101,7 @@ make_scatterp_df <- function(sub, x, y) {
         dol_contract <- tapply(sub$Contract_Obligation,
                                INDEX=sub$contract_id,
                                FUN=mean, na.rm=TRUE)
+        observe({print(head(dol_contract))})
         res_df <- data.frame(num=c(1:length(sub[[x]])))
         res_df[[axis_lab(x)]] <- as.vector(dol_contract)
         res_df[[axis_lab(y)]] <- as.vector(n_items)

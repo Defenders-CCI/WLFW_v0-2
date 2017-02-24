@@ -21,10 +21,11 @@ source("pages/data_page.R")
 ###############################################################################
 # Central landing page for sec7 basic app
 results_page <- {
-    navbarPage("Working Lands for Wildlife",
-        map_page,
-        data_page,
-        inverse=FALSE,
-        position="fixed-top"
-    )
+  navbarPage(
+    "Working Lands for Wildlife",
+    map_page,
+    data_page,
+    inverse=FALSE,
+    position="fixed-top"
+  )
 }
